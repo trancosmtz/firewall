@@ -2,3 +2,7 @@ FALSE = 0
 TRUE = 1 
 
 while [$TRUE]; do
+
+cat /etc/mtab | grep media >> /dev/null
+USBDEV=$(dmesg | tail -n30 | )
+  
