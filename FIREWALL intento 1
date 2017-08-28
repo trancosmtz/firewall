@@ -1,6 +1,9 @@
 
 #!/bin/bash
 #autores Martínez González J.Alfredo && 
+su
+gsettings set org.gnome.desktop.media-handling automount false
+gsettings set org.gnome.desktop.media-handling automount-open true
 FALSE = 0
 TRUE = 1 
 
