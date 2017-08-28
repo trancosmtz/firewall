@@ -1,64 +1,44 @@
+
+#!/bin/bash
+#autores Martínez González J.Alfredo && 
 FALSE = 0
 TRUE = 1 
 
   while [$TRUE]; do
-
-    cat /etc/mtab | grep media >> /dev/null
-    
-      USBDEV=$(dmesg | tail -n30 | grep ": Serial"| awk'{print $6}')
-  
-  MOUNTED=$(lsblk | grep-c "sd*[b-z]1")
-  
+    cat /etc/mtab | grep media >> /dev/null    
+      USBDEV=$(dmesg | tail -n30 | grep ": Serial"| awk'{print $6}')  
+  MOUNTED=$(lsblk | grep-c "sd*[b-z]1")  
       if[$MOUNTED==1];then
-          if[$(grep -c $USBDEV bloqueados.txt)==$FALSE];then
-              if[$(grep -c $USBDEV libres.txt)==$FALSE];then
-                  echo "Se a detectado un nuevo dispositivo: $USBDEV ¿Que desea hacer?"
-                  echo "1)bloquear para siempre  2)Montar dispositivo  3)añadir a libres"
-                  
-          read
-      seleccion
-      
+       if[$(grep -c $USBDEV bloqueados.txt)==$FALSE];then
+         if[$(grep -c $USBDEV libres.txt)==$FALSE];then
+            echo "hay un nuevo dispositivo: $USBDEV "
+            echo "¿Qué quieres hacer con este?"
+            echo "1) Agredar dispositivo  "
+            echo "2) Eliminarlo hasta el fin de los tiempos >:v "
+            echo "3) Añadir adispositivos libres"                                   
+         read
+      seleccion      
       case $seleccion in
-            1) echo $USBDEV>>
+            1) mount
+              /dev/sdb1/media;;                  
+            2)     echo $USBDEV>>
               bloqueados
               eject
-              /dev/sdb1;;
-            
-            2) mount
-              /dev/sdb1/media;;
-              
+              /dev/sdb1;;              
             3) echo
-              $USBDEV>>libres;;
-            
+              $USBDEV>>libres;;            
             *) echo
-              "opcion invalidad";;
-              
-            esac1
-            
+              "tu opcion no esta registrada";;              
+            esac1            
             else
                 mount/dev/sbd1
-               /media/
-            
-            fi
-            
-            else
-            
-            eject sdb
-            
-            
-            fi
-            
-            
-            fi
-            
-            
+               /media/            
+            fi            
+            else            
+            eject sdb                        
+            fi                        
+            fi                        
             dmesg --clear
-            
-            
-            mount -a
-            
-            
-            sleep 5
-            
-            
+            mount -a                        
+            sleep 5                        
             done
